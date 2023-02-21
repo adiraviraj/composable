@@ -888,8 +888,6 @@ impl pallet_staking_rewards::Config for Runtime {
 }
 
 /// The calls we permit to be executed by extrinsics
-// TODO(hussein-aitlahcen):
-// remove IBC pallets from the call filter once centauri is merged
 pub struct BaseCallFilter;
 impl Contains<RuntimeCall> for BaseCallFilter {
 	fn contains(call: &RuntimeCall) -> bool {
