@@ -17,11 +17,11 @@
         buildInputs = with pkgs; [ openssl zstd ];
         nativeBuildInputs = with pkgs;
           [ clang pkg-config self'.packages.rust-nightly ]
-            ++ lib.optional stdenv.isDarwin
-            (with pkgs.darwin.apple_sdk.frameworks; [
-              Security
-              SystemConfiguration
-            ]);
+          ++ lib.optional stdenv.isDarwin
+          (with pkgs.darwin.apple_sdk.frameworks; [
+            Security
+            SystemConfiguration
+          ]);
         RUST_BACKTRACE = "full";
       } // subattrs;
       check-pallet = pkgs.writeShellApplication {
@@ -33,8 +33,7 @@
           cargo clippy --package "$1" -- --deny warnings --allow deprecated
         '';
       };
-    in
-    {
+    in {
       _module.args.subTools = rec { inherit subenv subattrs; };
       packages = { inherit check-pallet; };
     };
