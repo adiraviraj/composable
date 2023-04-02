@@ -43,13 +43,15 @@
         statemine-node
         subwasm
         unit-tests
+        hyperspace-composable-rococo-picasso-rococo
+        hyperspace-composable-rococo-picasso-rococo-image
       ]);
 
       docker-images-to-push = pkgs.linkFarmFromDrvs "docker-images-to-push"
         (with self'.packages; [
           cmc-api-image
-          devnet-dali-image
-          hyperspace-dali-image
+          hyperspace-composable-rococo-picasso-rococo-image
+          devnet-picasso-image
         ]);
     };
   };

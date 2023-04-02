@@ -1,14 +1,15 @@
 { name, execCommands, configPathSource, configPathContainer, dependsOn
 , restartPolicy, pkgs, packages, devnetTools }: {
   image = {
-    contents = [ packages.hyperspace-dali ]
+    contents = [ packages.hyperspace-composable-rococo-picasso-rococo ]
       ++ devnetTools.withBaseContainerTools;
     enableRecommendedContents = true;
   };
   service = {
     restart = restartPolicy;
     environment = { RUST_LOG = "debug"; };
-    entrypoint = "${pkgs.lib.meta.getExe packages.hyperspace-dali}";
+    entrypoint = "${pkgs.lib.meta.getExe
+      packages.hyperspace-composable-rococo-picasso-rococo}";
     command = execCommands;
     volumes = [{
       source = configPathSource;

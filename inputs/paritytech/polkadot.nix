@@ -1,6 +1,6 @@
 { self, ... }: {
   perSystem = { config, self', inputs', pkgs, lib, system, crane
-    , systemCommonRust, subTools, ... }:
+    , systemCommonRust, subnix, ... }:
     let
       buildPolkadotNode =
         { name, version, repo, owner, rev, hash, cargoSha256 }:
@@ -17,7 +17,7 @@
 
           __noChroot = true;
 
-        } // subTools.subenv);
+        } // subnix.subenv);
     in {
       packages = rec {
         # current version for centauri

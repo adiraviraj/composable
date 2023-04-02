@@ -1,4 +1,5 @@
-{ pkgs, devnet-a, devnet-b, devnetTools, packages, ... }: {
+{ pkgs, devnet-a, devnet-b, devnetTools, packages, hyperspace-relay ? true, ...
+}: {
   modules = [
     (let
       configPathSource = "/tmp/config.toml";
@@ -83,7 +84,7 @@
               inherit configPathSource configPathContainer pkgs packages
                 devnetTools;
               dependsOn = dependsOnCreateClient;
-              restartPolicy = "no";
+              restartPolicy = "on-failure";
             }) [ network-name network-name-2 ];
 
           "hyperspace-create-channels" = mkComposableContainer
@@ -105,7 +106,7 @@
               dependsOn = dependsOnCreateConnection;
               restartPolicy = "no";
             }) [ network-name network-name-2 ];
-
+        } // pkgs.lib.optionalAttrs hyperspace-relay {
           "hyperspace-relay" = mkComposableContainer
             (import ../services/centauri.nix {
               name = "hyperspace-relay";
