@@ -34,7 +34,7 @@
         '';
       };
     in {
-      _module.args.subTools = rec { inherit subenv subattrs; };
+      _module.args.subnix = rec { inherit subenv subattrs; };
       packages = { inherit check-pallet; };
     };
 }

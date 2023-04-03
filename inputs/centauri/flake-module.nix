@@ -14,7 +14,7 @@
         hash = "sha256-rnKUfGcF9TTSockx/YqJzpsPPu23jplc4BiOyoOSsV8=";
       };
       hyperspace-client-template = {
-        chain_a = {
+        chain_a = {     
           channel_whitelist = [ ];
           client_id = "10-grandpa-0";
           commitment_prefix = "0x6962632f";
@@ -26,9 +26,10 @@
           private_key = "//Alice";
           relay_chain_rpc_url = "ws://devnet-a:9944";
           ss58_version = 49;
-          type = "parachain";
+          type = "picasso_kusama";
         };
         chain_b = {
+          type="composable";
           channel_whitelist = [ ];
           client_id = "10-grandpa-0";
           commitment_prefix = "0x6962632f";
@@ -39,8 +40,7 @@
           parachain_rpc_url = "ws://devnet-b:29988";
           private_key = "//Alice";
           relay_chain_rpc_url = "ws://devnet-b:29944";
-          ss58_version = 49;
-          type = "parachain";
+          ss58_version = 50;
         };
         core = { prometheus_endpoint = "https://127.0.0.1"; };
       };

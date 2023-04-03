@@ -8,7 +8,7 @@
           buildInputs = [
             self'.packages.centauri-codegen
             runtime
-            self'.packages.rococo-wasm-runtime
+            self'.packages.rococo-wasm-runtime-current
           ];
           nativeBuildInputs = with pkgs;
             [ clang ] ++ systemCommonRust.darwin-deps;
@@ -17,7 +17,7 @@
             ${pkgs.lib.meta.getExe self'.packages.centauri-codegen} \
               --path $out \
               --parachain-wasm=${runtime}/lib/runtime.optimized.wasm \
-              --relaychain-wasm=${self'.packages.rococo-wasm-runtime}/lib/rococo_runtime.compact.compressed.wasm
+              --relaychain-wasm=${self'.packages.rococo-wasm-runtime-current}/lib/rococo_runtime.compact.compressed.wasm
           '';
         };
     in {

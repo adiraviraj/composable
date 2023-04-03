@@ -7,7 +7,7 @@
   };
   service = {
     restart = restartPolicy;
-    environment = { RUST_LOG = "debug"; };
+    environment = { RUST_LOG = "trace,socketto=debug,tracing::span=debug,mio::poll=debug"; };
     entrypoint = "${pkgs.lib.meta.getExe
       packages.hyperspace-composable-rococo-picasso-rococo}";
     command = execCommands;

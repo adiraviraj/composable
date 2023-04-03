@@ -13,7 +13,9 @@
       devnet-centauri = pkgs.composable.mkDevnetProgram "devnet-centauri"
         (import ./specs/centauri.nix {
           inherit pkgs devnetTools packages;
+          #ASD
           devnet-a = packages.zombienet-picasso-centauri-a;
+          #ASD
           devnet-b = packages.zombienet-composable-centauri-b;
         });
 
