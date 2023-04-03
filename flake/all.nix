@@ -40,6 +40,8 @@
         hyperspace-dali
         hyperspace-dali-image
         polkadot-node-on-parity-kusama
+        #ASD
+        polkadot-node-dep
         polkadot-node-on-parity-polkadot
         statemine-node
         subwasm
