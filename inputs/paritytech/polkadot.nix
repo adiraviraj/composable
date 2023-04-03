@@ -12,17 +12,25 @@
     , ...
     }:
     let
+      _cargo-debug-attrss = {
+        CARGO_LOG = "debug";
+        CARGO_NET_GIT_FETCH_WITH_CLI = "true";
+        CARGO_HTTP_MULTIPLEXING = "false";
+        CARGO_HTTP_DEBUG = "true";
+        RUST_LOG = "debug";
+      };
       buildPolkadotNode =
         { name, version, repo, owner, rev, hash, cargoSha256 }:
         pkgs.rustPlatform.buildRustPackage (rec {
           inherit name version cargoSha256;
+          buildPackage = [pkgs.git];
           src = pkgs.fetchgit {
             url = "https://github.com/${owner}/${repo}.git";
             inherit rev;
             sha256 = hash;
             fetchSubmodules = false;
           };
-
+          #env = _cargo-debug-attrss;
           meta = { mainProgram = "polkadot"; };
 
           __noChroot = true;
@@ -59,9 +67,8 @@
               owner = "paritytech";
               rev = rococo-runtime-commit;
               hash = "sha256-x2IEIHxH8Hg+jFIpnPrTsqISEAZHFuXhJD+H1S+G3nk=";
-              cargoSha256 = "sha256-639VMQBvDIRPlCTQVGsS8Xy3Y6nJVqO5VDkuCDQtjqg=";
+              cargoSha256 = "sha256-TxYVo45W/xa5tYzD/SdEeCj6+1Ajr9Li9X/JRA9pNzI=";
             };
-
           polkadot-node-9360 =
             let version = "v0.9.36";
             in buildPolkadotNode rec {
@@ -71,7 +78,7 @@
               owner = "paritytech";
               rev = "refs/tags/${version}";
               hash = "sha256-x2IEIHxH8Hg+jFIpnPrTsqISEAZHFuXhJD+H1S+G3nk=";
-              cargoSha256 = "sha256-639VMQBvDIRPlCTQVGsS8Xy3Y6nJVqO5VDkuCDQtjqg=";
+              cargoSha256 = "sha256-TxYVo45W/xa5tYzD/SdEeCj6+1Ajr9Li9X/JRA9pNzI=";
             };
           # for xcmv3 release and centauri client asap they upgrade
           polkadot-node-9390 =

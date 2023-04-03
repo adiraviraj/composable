@@ -116,10 +116,10 @@
             pname = "${name}";
             src = centauri-src;
             buildInputs = with pkgs; [ sd git ];
-            patches = [
-              "${composable-rococo-picasso-rococo-subxt-hyperspace-patch}/picasso_kusama.patch"
-              "${composable-rococo-picasso-rococo-subxt-hyperspace-patch}/composable_polkadot.patch"
-            ];
+            # patches = [
+            #   "${composable-rococo-picasso-rococo-subxt-hyperspace-patch}/picasso_kusama.patch"
+            #   "${composable-rococo-picasso-rococo-subxt-hyperspace-patch}/composable_polkadot.patch"
+            # ];
             patchFlags = "--strip=4";
             installPhase = ''
               mkdir --parents $out
@@ -127,10 +127,10 @@
               cp ${./composable.patch} "$out/hyperspace/core/src/substrate/"
 
               cd $out/utils/subxt/generated/src/picasso_kusama
-              patch ${patchFlags} -- < ${builtins.head patches}
+              patch ${patchFlags} -- < "${composable-rococo-picasso-rococo-subxt-hyperspace-patch}/picasso_kusama.patch"
 
               cd $out/utils/subxt/generated/src/composable
-              patch ${patchFlags} -- < ${builtins.head (builtins.tail patches)}
+              patch ${patchFlags} -- < "${composable-rococo-picasso-rococo-subxt-hyperspace-patch}/composable_polkadot.patch"
               sd "rococo" "polkadot" "$out/utils/subxt/generated/src/composable/relaychain.rs"
 
               cd "$out/hyperspace/core/src/substrate/"
