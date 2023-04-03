@@ -14,6 +14,7 @@
         hash = "sha256-rnKUfGcF9TTSockx/YqJzpsPPu23jplc4BiOyoOSsV8=";
       };
       hyperspace-client-template = {
+        #ASD
         chain_a = {     
           channel_whitelist = [ ];
           client_id = "10-grandpa-0";

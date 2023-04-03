@@ -12,6 +12,7 @@
           ];
           nativeBuildInputs = with pkgs;
             [ clang ] ++ systemCommonRust.darwin-deps;
+            #ASD
           installPhase = ''
             mkdir --parents $out
             ${pkgs.lib.meta.getExe self'.packages.centauri-codegen} \

@@ -5,12 +5,12 @@
       relaychainBase = {
         chain = "rococo-local";
         default_command =
-          pkgs.lib.meta.getExe self'.packages.polkadot-node-on-parity-kusama;
+          pkgs.lib.meta.getExe self'.packages.polkadot-node-dep;
         count = 3;
       };
 
       zombienet-rococo-local-composable-config = with prelude;
-        { chain ? "dali-dev", ws_port ? null, rpc_port ? null
+        { chain , ws_port ? null, rpc_port ? null
         , relay_ws_port ? null, relay_rpc_port ? null, rust_log_add ? null
         , para-id ? 2087, command ? self'.packages.composable-node }:
         mkZombienet {
@@ -131,6 +131,7 @@
             chain = "picasso-dev";
           });
 
+        #ASD
         zombienet-composable-centauri-b =
           zombieTools.writeZombienetShellApplication
           "zombienet-composable-centauri-b"
