@@ -28,7 +28,6 @@
         cmc-api-image
         composable-bench-node
         composable-node
-        dali-subxt-client
         devnet-centauri
         devnet-dali
         devnet-dali-complete
@@ -40,7 +39,6 @@
         hyperspace-dali
         hyperspace-dali-image
         polkadot-node-on-parity-kusama
-
         polkadot-node-dep
         polkadot-node-on-parity-polkadot
         statemine-node
