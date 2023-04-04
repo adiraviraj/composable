@@ -29,9 +29,9 @@
         composable-bench-node
         composable-node
         devnet-centauri
-        devnet-dali
+        devnet-picasso
         devnet-dali-complete
-        devnet-dali-image
+        devnet-picasso-image
         devnet-initialize-script-picasso-persistent
         devnet-integration-tests
         devnet-picasso-complete
