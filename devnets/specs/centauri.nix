@@ -84,7 +84,7 @@
               inherit configPathSource configPathContainer pkgs packages
                 devnetTools;
               dependsOn = dependsOnCreateClient;
-               restartPolicy = "no";
+              restartPolicy = "no";
             }) [ network-name network-name-2 ];
 
           "hyperspace-create-channels" = mkComposableContainer

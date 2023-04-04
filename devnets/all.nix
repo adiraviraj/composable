@@ -13,10 +13,10 @@
       devnet-centauri = pkgs.composable.mkDevnetProgram "devnet-centauri"
         (import ./specs/centauri.nix {
           inherit pkgs devnetTools packages;
-          #ASD
+
           devnet-a = packages.zombienet-picasso-centauri-a;
-          #ASD
-          devnet-b = packages.zombienet-composable-centauri-b;
+
+          devnet-b = packages.zombienet-picasso-centauri-b;
         });
 
       devnet-centauri-no-relay =
@@ -24,7 +24,7 @@
         (import ./specs/centauri.nix {
           inherit pkgs devnetTools packages;
           devnet-a = packages.zombienet-picasso-centauri-a;
-          devnet-b = packages.zombienet-composable-centauri-b;
+          devnet-b = packages.zombienet-picasso-centauri-b;
           hyperspace-relay = false;
         });
 
