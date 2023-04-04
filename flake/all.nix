@@ -36,8 +36,6 @@
         devnet-integration-tests
         devnet-picasso-complete
         frontend-static
-        hyperspace-dali
-        hyperspace-dali-image
         polkadot-node-on-parity-kusama
         polkadot-node-dep
         polkadot-node-on-parity-polkadot
