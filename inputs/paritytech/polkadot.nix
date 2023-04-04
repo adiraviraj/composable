@@ -2,7 +2,7 @@
   perSystem = { config, self', inputs', pkgs, lib, system, crane
     , systemCommonRust, subnix, ... }:
     let
-      _cargo-debug-attrss = {
+      _cargo-debug-attrs = {
         CARGO_LOG = "debug";
         CARGO_NET_GIT_FETCH_WITH_CLI = "true";
         CARGO_HTTP_MULTIPLEXING = "false";
@@ -20,7 +20,7 @@
             sha256 = hash;
             fetchSubmodules = false;
           };
-          #env = _cargo-debug-attrss;
+          # env = _cargo-debug-attrs;
           meta = { mainProgram = "polkadot"; };
 
           __noChroot = true;
@@ -82,7 +82,7 @@
 
         polkadot-node-on-parity-kusama = polkadot-node-9360;
         polkadot-node-on-parity-polkadot = polkadot-node-9360;
-        #polkadot-node-on-parity-rococo = polkadot-node-9390;
+        polkadot-node-on-parity-rococo = polkadot-node-9390;
       };
     };
 }

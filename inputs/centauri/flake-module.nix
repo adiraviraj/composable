@@ -113,7 +113,10 @@
             installPhase = ''
               mkdir --parents $out
               set +e
-              diff --exclude=mod.rs --recursive --unified $src/utils/subxt/generated/src/composable ${self'.packages.composable-rococo-subxt-client}/ > $out/composable_polkadot.patch            
+              diff --exclude=mod.rs --recursive --unified $src/utils/subxt/generated/src/composable ${self'.packages.composable-rococo-subxt-client}/ > $out/composable_polkadot.patch
+              if [[ $? -ne 1 ]] ; then
+                echo "Failed diff"              
+              fi                
               diff --exclude=mod.rs --recursive --unified $src/utils/subxt/generated/src/picasso_kusama ${self'.packages.picasso-rococo-subxt-client}/ > $out/picasso_kusama.patch            
               if [[ $? -ne 1 ]] ; then
                 echo "Failed diff"              
@@ -130,10 +133,6 @@
             pname = "${name}";
             src = centauri-src;
             buildInputs = with pkgs; [ sd git ];
-            # patches = [
-            #   "${composable-rococo-picasso-rococo-subxt-hyperspace-patch}/picasso_kusama.patch"
-            #   "${composable-rococo-picasso-rococo-subxt-hyperspace-patch}/composable_polkadot.patch"
-            # ];
             patchFlags = "--strip=4";
             installPhase = ''
               mkdir --parents $out
