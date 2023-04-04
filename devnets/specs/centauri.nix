@@ -79,12 +79,12 @@
                 "--config"
                 configPathContainer
                 "--delay-period"
-                "0"
+                "30"
               ];
               inherit configPathSource configPathContainer pkgs packages
                 devnetTools;
               dependsOn = dependsOnCreateClient;
-              restartPolicy = "on-failure";
+               restartPolicy = "no";
             }) [ network-name network-name-2 ];
 
           "hyperspace-create-channels" = mkComposableContainer

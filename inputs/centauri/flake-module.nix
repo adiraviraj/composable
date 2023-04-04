@@ -13,13 +13,13 @@
         rev = "54a1c42553d18160f5e89542d87aea6fcc95b4b5";
         hash = "sha256-rnKUfGcF9TTSockx/YqJzpsPPu23jplc4BiOyoOSsV8=";
       };
-      hyperspace-client-template = {
-        #ASD
-        chain_a = {     
+
+      hyperspace-picasso-kusama-spec =  {     
           channel_whitelist = [ ];
           client_id = "10-grandpa-0";
           commitment_prefix = "0x6962632f";
           finality_protocol = "Grandpa";
+          connection_id = "connection-0"
           key_type = "sr25519";
           name = "picasso_1";
           para_id = 2087;
@@ -29,11 +29,32 @@
           ss58_version = 49;
           type = "picasso_kusama";
         };
+
+        composable-polkadot-spec = {
+          type="composable";
+          channel_whitelist = [ ];
+          client_id = "10-grandpa-0";
+          commitment_prefix = "0x6962632f";
+          connection_id = "connection-0"
+          finality_protocol = "Grandpa";
+          key_type = "sr25519";
+          name = "picasso_2";
+          para_id = 2087;
+          parachain_rpc_url = "ws://devnet-b:29988";
+          private_key = "//Alice";
+          relay_chain_rpc_url = "ws://devnet-b:29944";
+          ss58_version = 50;
+        };
+
+      hyperspace-client-template = {
+        #ASD
+        chain_a = hyperspace-picasso-kusama-spec;
         chain_b = {
           type="composable";
           channel_whitelist = [ ];
           client_id = "10-grandpa-0";
           commitment_prefix = "0x6962632f";
+          connection_id = "connection-0"
           finality_protocol = "Grandpa";
           key_type = "sr25519";
           name = "picasso_2";
