@@ -21,7 +21,6 @@
         hash = "sha256-RohJflB98j4pDSpiOzaA35Inkwiyci5m+OhaTsjNNr0=";
       };
 
-
       centauri-src-release = pkgs.fetchFromGitHub {
         owner = "ComposableFi";
         repo = "centauri";
@@ -70,8 +69,7 @@
 
       hyperspace-client-template = {
         chain_a = hyperspace-picasso-kusama-spec-a;
-        chain_b = hyperspace-picasso-kusama-spec-b;
-        #chain_b = composable-polkadot-spec;
+        chain_b = composable-polkadot-spec;
         core = { prometheus_endpoint = "https://127.0.0.1"; };
       };
 
@@ -83,8 +81,7 @@
           connection_id = "connection-0";
         };
       };
-    in
-    {
+    in {
       packages = rec {
         centauri-codegen = crane.stable.buildPackage {
           name = "centauri-codegen";

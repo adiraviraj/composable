@@ -185,6 +185,17 @@
           };
           type = "app";
         };
+
+        zombienet-log-cat = {
+          program = pkgs.writeShellApplication rec {
+            name = "zombienet-log-follow";
+            text = ''
+              CONTAINER="''${1:-composable-devnet-a-1}"
+              docker exec -it "$CONTAINER"   bash  -c 'LOG=$(find /tmp/ -name "zombie-*" | head --lines=1)/alice.log && cat $LOG'
+            '';
+          };
+          type = "app";
+        };
       };
     };
 }
