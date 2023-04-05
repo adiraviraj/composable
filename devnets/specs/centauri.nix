@@ -79,7 +79,7 @@
                 "--config"
                 configPathContainer
                 "--delay-period"
-                "0"
+                "10"
               ];
               inherit configPathSource configPathContainer pkgs packages
                 devnetTools;

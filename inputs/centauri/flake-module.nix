@@ -7,7 +7,22 @@
         PROTOC_INCLUDE = "${pkgs.protobuf}/include";
         PROTOC_NO_VENDOR = "1";
       };
-      centauri-src = pkgs.fetchFromGitHub {
+
+      cargo-lock = builtins.fromTOML (builtins.readFile ../../code/Cargo.lock);
+      centauri-runtime-dep = builtins.head
+        (builtins.filter (x: x.name == "pallet-ibc") (cargo-lock.package));
+      centauri-runtime-commit =
+        builtins.elemAt (builtins.split "#" centauri-runtime-dep.source) 2;
+
+      centauri-src-current = pkgs.fetchFromGitHub {
+        owner = "dzmitry-lahoda-forks";
+        repo = "centauri";
+        rev = centauri-runtime-commit;
+        hash = "sha256-RohJflB98j4pDSpiOzaA35Inkwiyci5m+OhaTsjNNr0=";
+      };
+
+
+      centauri-src-release = pkgs.fetchFromGitHub {
         owner = "ComposableFi";
         repo = "centauri";
         rev = "54a1c42553d18160f5e89542d87aea6fcc95b4b5";
@@ -54,9 +69,9 @@
       };
 
       hyperspace-client-template = {
-
         chain_a = hyperspace-picasso-kusama-spec-a;
         chain_b = hyperspace-picasso-kusama-spec-b;
+        #chain_b = composable-polkadot-spec;
         core = { prometheus_endpoint = "https://127.0.0.1"; };
       };
 
@@ -68,17 +83,18 @@
           connection_id = "connection-0";
         };
       };
-    in {
+    in
+    {
       packages = rec {
         centauri-codegen = crane.stable.buildPackage {
           name = "centauri-codegen";
           cargoArtifacts = crane.stable.buildDepsOnly {
-            src = centauri-src;
+            src = centauri-src-current;
             doCheck = false;
             cargoExtraArgs = "-p codegen";
             cargoTestCommand = "";
           };
-          src = centauri-src;
+          src = centauri-src-current;
           doCheck = false;
           cargoExtraArgs = "-p codegen";
           cargoTestCommand = "";
@@ -87,12 +103,12 @@
         centauri-hyperspace = crane.stable.buildPackage (subnix.subenv // {
           name = "centauri-hyperspace";
           cargoArtifacts = crane.stable.buildDepsOnly (subnix.subenv // {
-            src = centauri-src;
+            src = centauri-src-current;
             doCheck = false;
             cargoExtraArgs = "-p hyperspace";
             cargoTestCommand = "";
           });
-          src = centauri-src;
+          src = centauri-src-current;
           doCheck = false;
           cargoExtraArgs = "-p hyperspace";
           cargoTestCommand = "";
@@ -108,7 +124,7 @@
               self'.packages.composable-rococo-subxt-client
               self'.packages.picasso-rococo-subxt-client
             ];
-            src = centauri-src;
+            src = centauri-src-current;
             patchPhase = "true";
             installPhase = ''
               mkdir --parents $out
@@ -131,7 +147,7 @@
           pkgs.stdenv.mkDerivation rec {
             name = "composable-rococo-picasso-rococo-centauri-patched-src";
             pname = "${name}";
-            src = centauri-src;
+            src = centauri-src-current;
             buildInputs = with pkgs; [ sd git ];
             patchFlags = "--strip=4";
             installPhase = ''

@@ -16,6 +16,7 @@
 
           devnet-a = packages.zombienet-picasso-centauri-a;
 
+          #devnet-b = packages.zombienet-composable-centauri-b;
           devnet-b = packages.zombienet-picasso-centauri-b;
         });
 
@@ -24,7 +25,7 @@
         (import ./specs/centauri.nix {
           inherit pkgs devnetTools packages;
           devnet-a = packages.zombienet-picasso-centauri-a;
-          devnet-b = packages.zombienet-picasso-centauri-b;
+          devnet-b = packages.zombienet-composable-centauri-b;
           hyperspace-relay = false;
         });
 

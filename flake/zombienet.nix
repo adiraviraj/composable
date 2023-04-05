@@ -179,7 +179,8 @@
           program = pkgs.writeShellApplication rec {
             name = "zombienet-log-follow";
             text = ''
-              docker exec -it composable-devnet-a-1   bash  -c 'LOG=$(find /tmp/ -name "zombie-*" | head --lines=1)/alice.log && tail --follow $LOG'
+              CONTAINER="''${1:-composable-devnet-a-1}"
+              docker exec -it "$CONTAINER"   bash  -c 'LOG=$(find /tmp/ -name "zombie-*" | head --lines=1)/alice.log && tail --follow $LOG'
             '';
           };
           type = "app";
