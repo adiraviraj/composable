@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:0.202.7-bullseye
 ARG USER=vscode
 ARG UID=1000
 ARG GID=${UID}
-ARG NIX_INSTALLER=https://releases.nixos.org/nix/nix-2.10.3/install
+ARG NIX_INSTALLER=https://releases.nixos.org/nix/nix-2.12.0/install
 ARG CHANNEL_URL=https://github.com/NixOS/nixpkgs/archive/aaa1c973c8c189195e1b1a702d3b74dbcde91538.tar.gz
 ARG CACHIX_NAME=composable-community
 
@@ -47,7 +47,7 @@ WORKDIR /home/${USER}/
 COPY --chown=${USER}:${USER} . . 
 
 RUN source ~/.nix-profile/etc/profile.d/nix.sh && \
-    nix-env --set-flag priority 10 nix-2.10.3 && \
+    nix-env --set-flag priority 10 nix-2.12.0 && \
     export "ARCH_OS=$(uname -m)-$(uname -s | tr '[:upper:]' '[:lower:]')" && \
     nix build --no-link ".#homeConfigurations.vscode-minimal.${ARCH_OS}.activationPackage" -L --show-trace
 
