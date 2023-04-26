@@ -10,6 +10,7 @@ use common::{
 	ibc::{ForeignIbcIcs20Assets, MinimumConnectionDelaySeconds},
 };
 use frame_support::traits::EitherOf;
+use ibc_primitives::{runtime_interface::ss58_to_account_id_32, IbcAccount};
 use pallet_ibc::{
 	light_client_common::RelayChain, routing::ModuleRouter, DenomToAssetId, IbcAssetIds, IbcAssets,
 };
@@ -156,6 +157,16 @@ impl pallet_ibc::ics20_fee::Config for Runtime {
 	type PalletId = IbcIcs20FeePalletId;
 }
 
+fn create_alice_key() -> <Runtime as pallet_ibc::Config>::AccountIdConversion {
+	let alice = "5yNZjX24n2eg7W6EVamaTXNQbWCwchhThEaSWB7V3GRjtHeL";
+	let account_id_32 = ss58_to_account_id_32(alice).unwrap().into();
+	IbcAccount(account_id_32)
+}
+
+parameter_types! {
+	pub FeeAccount: <Test as Config>::AccountIdConversion = create_alice_key();
+}
+
 impl pallet_ibc::Config for Runtime {
 	type TimeProvider = Timestamp;
 	type RuntimeEvent = RuntimeEvent;
@@ -197,4 +208,5 @@ impl pallet_ibc::Config for Runtime {
 	>;
 	#[cfg(not(feature = "testnet"))]
 	type RelayerOrigin = EnsureSignedBy<TechnicalCommitteeMembership, Self::IbcAccountId>;
+	type FeeAccount = FeeAccount;
 }
