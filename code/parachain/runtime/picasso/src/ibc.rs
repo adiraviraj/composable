@@ -165,10 +165,6 @@ fn create_alice_key() -> <Runtime as pallet_ibc::Config>::AccountIdConversion {
 	IbcAccount(account_id_32)
 }
 
-parameter_types! {
-	pub FeeAccount: <Test as Config>::AccountIdConversion = create_alice_key();
-}
-
 impl pallet_ibc::Config for Runtime {
 	type TimeProvider = Timestamp;
 	type RuntimeEvent = RuntimeEvent;
