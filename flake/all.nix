@@ -12,16 +12,21 @@
         zombienet
       ]);
 
-      all-production-deps = pkgs.linkFarmFromDrvs "all-production-deps"
+      all-testnet-deps = pkgs.linkFarmFromDrvs "all-testnet-deps"
         (with self'.packages; [
-          kusama-runtime-on-parity
-          polkadot-node-on-parity-kusama
-          polkadot-node-on-parity-polkadot
           polkadot-node-on-parity-rococo
           polkadot-node-on-parity-westend
           polkadot-runtime-on-parity
           rococo-runtime-on-parity
           westend-runtime-on-parity
+        ]);
+
+      all-production-deps = pkgs.linkFarmFromDrvs "all-production-deps"
+        (with self'.packages; [
+          kusama-runtime-on-parity
+          polkadot-node-on-parity-kusama
+          polkadot-node-on-parity-polkadot
+          polkadot-runtime-on-parity
         ]);
 
       all-docs = pkgs.linkFarmFromDrvs "all-docs"
@@ -41,6 +46,7 @@
         check-composable-benchmarks-ci
         check-picasso-benchmarks-ci
         composable-bench-node
+        benchmarks-check
       ]);
 
       all-platforms = pkgs.linkFarmFromDrvs "all-platforms"
@@ -63,7 +69,6 @@
       all-ci-packages = pkgs.linkFarmFromDrvs "all-ci-packages"
         (with self'.packages; [
           all-platforms
-          benchmarks-check
           cargo-clippy-check
           cargo-deny-check
           check-picasso-integration-tests
@@ -77,6 +82,7 @@
         (with self'.packages; [
           cmc-api-image
           hyperspace-composable-rococo-picasso-rococo-image
+          hyperspace-composable-polkadot-picasso-kusama-image
           devnet-picasso-image
         ]);
     };

@@ -2,13 +2,6 @@
   perSystem = { config, self', inputs', pkgs, lib, system, crane
     , systemCommonRust, subnix, ... }:
     let
-      _cargo-debug-attrs = {
-        CARGO_LOG = "debug";
-        CARGO_NET_GIT_FETCH_WITH_CLI = "true";
-        CARGO_HTTP_MULTIPLEXING = "false";
-        CARGO_HTTP_DEBUG = "true";
-        RUST_LOG = "debug";
-      };
       buildPolkadotNode = { name, repo, owner, rev, hash, cargoSha256 }:
         pkgs.rustPlatform.buildRustPackage (subnix.subenv // rec {
           inherit name cargoSha256;
@@ -20,11 +13,7 @@
             sha256 = hash;
             fetchSubmodules = false;
           };
-          # env = _cargo-debug-attrs;
           meta = { mainProgram = "polkadot"; };
-
-          __noChroot = true;
-
         });
       cargo-lock = builtins.fromTOML (builtins.readFile ../../code/Cargo.lock);
       rococo-runtime-dep = builtins.head
@@ -71,8 +60,8 @@
           repo = "polkadot";
           owner = "paritytech";
           rev = rococo-runtime-commit;
-          hash = "sha256-24UcJTnbVDe8oW8S0stayHc7/vVyFQaqTSSPHNqJXkg=";
-          cargoSha256 = "sha256-OA0m9b3opPahHfsOMJylmstu6XmmCXC60T1e56uMqyE=";
+          hash = "sha256-byUC+6SQ+TgvQCXdQWIGf/BAyxitnT1q69RdyZL8AAc=";
+          cargoSha256 = "sha256-6MDtLXbEJuxB6+ObKdWqH0cFDzaDqHH00wuGZJ7kb+g=";
         };
 
         polkadot-node-on-parity-rococo = buildPolkadotNode rec {
