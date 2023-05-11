@@ -15763,6 +15763,7 @@ dependencies = [
  "getrandom 0.2.9",
  "hex",
  "impl-serde 0.4.0",
+ "jsonrpsee 0.16.2",
  "parity-scale-codec",
  "parking_lot 0.12.1",
  "primitive-types",
