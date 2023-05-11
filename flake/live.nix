@@ -10,8 +10,10 @@
         type = "app";
         program = pkgs.writeShellApplication {
           name = "composable-follow";
-          runtimeInputs = [ self'.packages.composable-node ];
+                runtimeInputs = [ self'.packages.composable-node ];
+
           text = ''
+
 
             ${rust_log}
 
